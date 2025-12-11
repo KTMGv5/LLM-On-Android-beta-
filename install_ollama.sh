@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPT_VERSION="1.0.0" UPDATE_URL="https://raw.githubusercontent.com/KTMGv5/LLM-On-Android-beta-/main/install_ollama.sh"
+SCRIPT_VERSION="1.0.0" UPDATE_URL="https://raw.githubusercontent.com/KTMGv5/LLM-On-Android-beta-/refs/heads/main/install_ollama.sh"
 
 check_for_updates() { echo "Checking for script updates..." remote_version=$(curl -fsSL "$UPDATE_URL" | grep 'SCRIPT_VERSION="' | head -n1 | cut -d'"' -f2)
 
