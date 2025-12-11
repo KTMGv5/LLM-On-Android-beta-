@@ -1,45 +1,45 @@
 #!/bin/bash
-# --- 1. Install Ollama from Termux Repository ---
-echo "Installing Termux dependencies and the offi>
+
+# --- 1. Install Ollama ---
+echo "Installing Termux dependencies and the official Ollama package..."
 pkg update
 pkg install -y curl ollama
 
 if [ $? -ne 0 ]; then
-    echo "Ollama package installation failed. Che>
+    echo "Ollama package installation failed. Check Termux repositories."
     exit 1
 fi
-echo "Ollama installed successfully using pkg ins>
 
-# --- 2. Start Ollama Server (Temporary Background) >
-echo "Starting Ollama server in the background for>
+echo "Ollama installed successfully using pkg install."
 
-# Run the server in the background
-ollama serve & > /dev/null 2>&1
+# --- 2. Start Ollama Server ---
+echo "Starting Ollama server in the background for model download..."
+ollama serve > /dev/null 2>&1 &
 OLLAMA_PID=$!
-sleep 5 # Give time for the server to spin up
+
+sleep 5  # allow time for server to start
 
 # --- 3. Install Efficient Model (Gemma 3:270m) ---
 SMALL_MODEL="gemma3:270m"
-echo "Downloading efficient model for mobile CPU:>
 
-ollama pull ${SMALL_MODEL}
+echo "Downloading efficient model for mobile CPU: ${SMALL_MODEL}"
+ollama pull "${SMALL_MODEL}"
 
 if [ $? -ne 0 ]; then
-    echo "Failed to download model ${SMALL_MODEL}>
+    echo "Failed to download model ${SMALL_MODEL}."
     kill $OLLAMA_PID 2>/dev/null
     exit 1
 fi
 
-echo "Model ${SMALL_MODEL} downloaded successfull>
+echo "Model ${SMALL_MODEL} downloaded successfully!"
 
-# --- 4. Cleanup and Next Steps ---
+# --- 4. Cleanup ---
 kill $OLLAMA_PID 2>/dev/null
 echo "Stopped background Ollama service."
 
-echo "**Installation Complete and Fixed!**"
+echo "**Installation Complete!**"
 echo "---"
 echo "### How to Use Ollama in Termux:"
-echo "1. **Start the Server:** Open a new Termux ses>
-echo "   *(Leave this session open!)*"
-echo "2. **Run the Model:** Open a second Termux ses>
+echo "1. Start the server:   ollama serve"
+echo "2. Run the model:      ollama run ${SMALL_MODEL}"
 echo "---"
