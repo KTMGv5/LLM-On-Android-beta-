@@ -22,7 +22,7 @@ You must have the [Termux application](https://termux.dev/) installed on your An
 
 1.  **Download the script:**
     ```bash
-    curl -fsSL https://raw.githubusercontent.com/KTMGv5/LLM-On-Android-beta-/refs/heads/main/install_ollama.sh -o install_ollama.sh
+    curl -fsSL https://raw.githubusercontent.com/KTMGv5/Ai_Chat_bot_on_Android/refs/heads/main/install_ollama.sh -o install_ollama.sh
     ```
 
 2.  **Make it executable:**
